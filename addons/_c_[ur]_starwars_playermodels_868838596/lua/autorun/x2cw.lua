@@ -1,0 +1,1 @@
+player_manager.AddValidModel( "X2CW", "models/x2cw/x2cw.mdl" )

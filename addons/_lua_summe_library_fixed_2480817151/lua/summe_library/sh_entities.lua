@@ -1,0 +1,3 @@
+function SummeLibrary:RegisterWeapon()
+    
+end

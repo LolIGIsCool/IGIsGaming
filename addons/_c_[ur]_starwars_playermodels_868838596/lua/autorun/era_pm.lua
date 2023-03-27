@@ -1,0 +1,1 @@
+player_manager.AddValidModel( "ERA", "models/x2era/x2era.mdl" )

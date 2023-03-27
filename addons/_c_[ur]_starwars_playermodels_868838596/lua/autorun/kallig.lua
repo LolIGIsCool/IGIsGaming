@@ -1,0 +1,1 @@
+player_manager.AddValidModel( "Aloysius Kallig", "models/kallig/kallig.mdl" )

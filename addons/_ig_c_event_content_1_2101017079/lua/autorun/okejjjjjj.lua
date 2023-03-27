@@ -1,0 +1,6 @@
+player_manager.AddValidModel( "Theron Shan", "models/church/swtor/theronshan/cpt_theron_shan.mdl" )
+player_manager.AddValidModel( "Kaleesh", "models/church/swtor/kaleesh/cpt_kaleesh.mdl" )
+player_manager.AddValidModel( "Kage", "models/church/swtor/kage/cpt_kage.mdl" )
+player_manager.AddValidModel( "Imperialdroid", "models/church/swtor/imperialdroid/cpt_imperialdroid.mdl" )
+player_manager.AddValidModel( "Republicdroid", "models/church/swtor/republicdroid/cpt_republicdroid.mdl" )
+player_manager.AddValidModel( "Jawa", "models/church/swtor/jawa/cpt_jawa.mdl" )

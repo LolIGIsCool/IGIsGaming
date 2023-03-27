@@ -1,0 +1,3 @@
+list.Set( "strasser_wookie_warrior", "models/player/strasser/wookie_warrior/wookie_warrior.mdl" )   // "models/player/strasser/wookie_warrior/wookie_warrior.mdl" )
+player_manager.AddValidModel( "strasser_wookie_warrior", "models/player/strasser/wookie_warrior/wookie_warrior.mdl" )   // "models/player/strasser/wookie_warrior/wookie_warrior.mdl" )
+player_manager.AddValidHands( "strasser_wookie_warrior", "models/player/strasser/wookie_warrior/wookie_warrior_hands.mdl", 0, "00000000" ) // "models/player/strasser/wookie_warrior/wookie_warrior_hands.mdl", 0, "00000000"

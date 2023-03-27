@@ -1,0 +1,7 @@
+list.Set( "strasser_rebel_tantive_assault", "models/player/strasser/rebel_tantive_assault/rebel_tantive_assault.mdl" )   // "models/player/strasser/rebel_tantive_assault/rebel_tantive_assault.mdl" )
+player_manager.AddValidModel( "strasser_rebel_tantive_assault", "models/player/strasser/rebel_tantive_assault/rebel_tantive_assault.mdl" )   // "models/player/strasser/rebel_tantive_assault/rebel_tantive_assault.mdl" )
+player_manager.AddValidHands( "strasser_rebel_tantive_assault", "models/player/strasser/rebel_tantive_assault/rebel_tantive_assault_hands.mdl", 0, "00000000" ) // "models/player/strasser/rebel_tantive_assault/rebel_tantive_assault_hands.mdl", 0, "00000000"
+
+list.Set( "strasser_rebel_tantive_officer", "models/player/strasser/rebel_tantive_officer/rebel_tantive_officer.mdl" )   // "models/player/strasser/rebel_tantive_officer/rebel_tantive_officer.mdl" )
+player_manager.AddValidModel( "strasser_rebel_tantive_officer", "models/player/strasser/rebel_tantive_officer/rebel_tantive_officer.mdl" )   // "models/player/strasser/rebel_tantive_officer/rebel_tantive_officer.mdl" )
+player_manager.AddValidHands( "strasser_rebel_tantive_officer", "models/player/strasser/rebel_tantive_officer/rebel_tantive_officer_hands.mdl", 0, "00000000" ) // "models/player/strasser/rebel_tantive_officer/rebel_tantive_officer_hands.mdl", 0, "00000000"

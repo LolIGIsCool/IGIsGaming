@@ -1,0 +1,5 @@
+include("quest_system/sh_init.lua")
+include("quest_system/client/cl_networking.lua")
+include("quest_system/client/cl_fonts.lua")
+include("quest_system/client/cl_vgui.lua")
+include("quest_system/client/cl_hud.lua")

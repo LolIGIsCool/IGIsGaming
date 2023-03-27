@@ -1,0 +1,2 @@
+player_manager.AddValidModel("Arena Wars Apocalypse","models/hopwire/gta5/arenawarsapoc_pm.mdl")
+player_manager.AddValidHands( "Arena Wars Apocalypse", "models/hopwire/gta5/arenawarsapoc_arms.mdl", 0, "00000000" ) // "", 0, "00000000" )

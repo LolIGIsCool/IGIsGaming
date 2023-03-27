@@ -1,0 +1,1 @@
+PrecacheParticleSystem( "explosion_huge_k" )

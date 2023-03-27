@@ -1,0 +1,2 @@
+list.Set( "PlayerOptionsModel", "RiotGearSoldier", "models/fallout_nv/nikout/LonesomeRoad/riotsoldier.mdl" )
+player_manager.AddValidModel( "RiotGearSoldier", "models/fallout_nv/nikout/LonesomeRoad/riotsoldier.mdl" )

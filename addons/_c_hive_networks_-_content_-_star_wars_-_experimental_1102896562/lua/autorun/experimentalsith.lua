@@ -1,0 +1,2 @@
+player_manager.AddValidModel( "Experimental Sith", "models/player/vaspyr/experimentalsith/experimentalsith_pm.mdl" );
+list.Set( "PlayerOptionsModel", "Experimental Sith", "models/player/vaspyr/experimentalsith/experimentalsith_pm.mdl" );

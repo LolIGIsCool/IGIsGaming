@@ -1,0 +1,1 @@
+player_manager.AddValidModel( "Revan Reborn", "models/revan/revan.mdl" )

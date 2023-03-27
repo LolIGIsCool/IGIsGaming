@@ -1,0 +1,182 @@
+function QUEST_SYSTEM.OpenMenu_Quests()
+    QUEST_SYSTEM.QuestFrame = TDLib("DFrame")
+    QUEST_SYSTEM.QuestFrame:SetSize(650, 490)
+    QUEST_SYSTEM.QuestFrame:Center()
+    QUEST_SYSTEM.QuestFrame:MakePopup()
+    QUEST_SYSTEM.QuestFrame:SetTitle("")
+    QUEST_SYSTEM.QuestFrame:SetDraggable(false)
+    QUEST_SYSTEM.QuestFrame.btnMaxim:Hide()
+    QUEST_SYSTEM.QuestFrame.btnMinim:Hide()
+    QUEST_SYSTEM.QuestFrame.btnClose:TDLib()
+    QUEST_SYSTEM.QuestFrame.btnClose:ClearPaint():Background(Color(29, 87, 196, 255)):Text("X", "QUEST_SYSTEM_ItemInfo"):BarHover():CircleClick():Outline(Color(255, 255, 255, 255), 1)
+    QUEST_SYSTEM.QuestFrame:ClearPaint():Blur():Background(Color(0, 0, 0, 200)):Outline(Color(255, 255, 255, 255), 2)
+
+    function QUEST_SYSTEM.QuestFrame:PerformLayout()
+        self.btnClose:SetPos(self:GetWide() - 35, 5)
+        self.btnClose:SetSize(31, 15)
+    end
+
+    local QUEST_SYSTEM_QuestFrame_Title = TDLib("DPanel", QUEST_SYSTEM.QuestFrame)
+    QUEST_SYSTEM_QuestFrame_Title:Stick(TOP)
+    QUEST_SYSTEM_QuestFrame_Title:ClearPaint():Text("Available Missions", "QUEST_SYSTEM_ItemTitle", color_white, TEXT_ALIGN_CENTER)
+    QUEST_SYSTEM_QuestFrame_DivW = TDLib("DPanel", QUEST_SYSTEM.QuestFrame)
+    QUEST_SYSTEM_QuestFrame_DivW:Stick(TOP)
+    QUEST_SYSTEM_QuestFrame_DivW:DivWide(3)
+    QUEST_SYSTEM_QuestFrame_DivW:ClearPaint()
+
+    function QUEST_SYSTEM.QuestFrame:Update()
+        if (IsValid(QUEST_SYSTEM.Quests_Panel)) then
+            QUEST_SYSTEM.Quests_Panel:Remove()
+        end
+
+        QUEST_SYSTEM.Quests_Panel = TDLib("DScrollPanel", QUEST_SYSTEM.QuestFrame)
+        QUEST_SYSTEM.Quests_Panel:Stick(FILL, 1)
+
+        function QUEST_SYSTEM.Quests_Panel:PerformLayout()
+            local Tall = self.pnlCanvas:GetTall()
+            local Wide = self:GetWide()
+            local YPos = 10
+            self:Rebuild()
+            self.VBar:SetUp(self:GetTall(), self.pnlCanvas:GetTall() + 300)
+            YPos = self.VBar:GetOffset()
+
+            if (self.VBar.Enabled) then
+                Wide = Wide - self.VBar:GetWide()
+            end
+
+            self.pnlCanvas:SetPos(0, YPos)
+            self.pnlCanvas:SetWide(Wide)
+            self:Rebuild()
+
+            if (Tall == self.pnlCanvas:GetTall()) then
+                self.VBar:SetScroll(self.VBar:GetScroll())
+            end
+        end
+
+        QUEST_SYSTEM.Quests_Panel:ClearPaint():Background(Color(50, 50, 50, 255)):Outline(Color(75, 115, 125, 255), 1)
+        QUEST_SYSTEM.Quests_Panel:GetVBar():TDLib()
+        QUEST_SYSTEM.Quests_Panel:GetVBar():ClearPaint():Background(Color(50, 50, 50, 255)):Outline(Color(255, 255, 255, 255), 1)
+        QUEST_SYSTEM.Quests_Panel:GetVBar().btnGrip:TDLib()
+        QUEST_SYSTEM.Quests_Panel:GetVBar().btnGrip:ClearPaint():Background(Color(29, 87, 196, 255)):Outline(Color(255, 255, 255, 255), 1)
+        QUEST_SYSTEM.Quests_Panel:GetVBar().btnUp:TDLib()
+        QUEST_SYSTEM.Quests_Panel:GetVBar().btnUp:ClearPaint():Background(Color(29, 87, 196, 255)):Outline(Color(255, 255, 255, 255), 1)
+        QUEST_SYSTEM.Quests_Panel:GetVBar().btnDown:TDLib()
+        QUEST_SYSTEM.Quests_Panel:GetVBar().btnDown:ClearPaint():Background(Color(29, 87, 196, 255)):Outline(Color(255, 255, 255, 255), 1)
+        local Category_Layout = TDLib("DIconLayout", QUEST_SYSTEM.Quests_Panel)
+        Category_Layout:Stick(TOP, 1)
+        Category_Layout:SetSpaceX(3)
+        Category_Layout:SetSpaceY(3)
+
+        local function AddItem(id, name, instruction, reward, time, amount, bonus)
+            local Category_Panel_BG = TDLib("DPanel", Category_Layout)
+            Category_Panel_BG:SetSize(153, 200)
+            Category_Panel_BG:ClearPaint():Background(Color(75, 75, 75, 125)):Outline(Color(255, 255, 255, 255), 1)
+            local Item_ScrollPanel = TDLib("DPanel", Category_Panel_BG)
+            Item_ScrollPanel:Stick(TOP, 1)
+            Item_ScrollPanel:SetTall(165)
+            Item_ScrollPanel:ClearPaint():Background(Color(50, 50, 50, 255)):Outline(Color(75, 115, 125, 255), 1)
+            local Item_Info_Name = TDLib("DLabel", Item_ScrollPanel)
+            Item_Info_Name:Stick(TOP, 1)
+            Item_Info_Name:SetText(name)
+            Item_Info_Name:SetContentAlignment(8)
+            Item_Info_Name:SetTextColor(Color(255, 255, 255, 255))
+            Item_Info_Name:SetFont("QUEST_SYSTEM_ItemInfo")
+            Item_Info_Name:SizeToContents()
+            local Item_Info_Reward = TDLib("DLabel", Item_ScrollPanel)
+            Item_Info_Reward:Stick(TOP, 1)
+            Item_Info_Reward:SetText("Reward: " .. string.Comma(reward) .. " credits")
+            Item_Info_Reward:SetContentAlignment(8)
+            Item_Info_Reward:SetTextColor(Color(255, 255, 255, 255))
+            Item_Info_Reward:SetFont("QUEST_SYSTEM_ItemInfo")
+            Item_Info_Reward:SizeToContents()
+
+            if (time > 0) then
+                time = (string.Comma(time) .. " seconds")
+            else
+                time = "infinite"
+            end
+
+            local Item_Info_Time = TDLib("DLabel", Item_ScrollPanel)
+            Item_Info_Time:Stick(TOP, 1)
+            Item_Info_Time:SetText("Time: " .. time)
+            Item_Info_Time:SetContentAlignment(8)
+            Item_Info_Time:SetTextColor(Color(255, 255, 255, 255))
+            Item_Info_Time:SetFont("QUEST_SYSTEM_ItemInfo")
+            Item_Info_Time:SizeToContents()
+            local Item_Info_Instruction = TDLib("DLabel", Item_ScrollPanel)
+            Item_Info_Instruction:Stick(TOP, 5)
+            Item_Info_Instruction:SetTall(60)
+            Item_Info_Instruction:SetText(string.format(instruction, amount))
+            Item_Info_Instruction:SetTextColor(Color(255, 255, 255, 255))
+            Item_Info_Instruction:SetFont("QUEST_SYSTEM_ItemInfo")
+            Item_Info_Instruction:SetWrap(true)
+            local Button_AcceptQuest = TDLib("DButton", Category_Panel_BG)
+            Button_AcceptQuest:SetPos(5, Category_Panel_BG:GetTall() - 30)
+            Button_AcceptQuest:SetSize(Category_Panel_BG:GetWide() - 10, 25)
+
+            Button_AcceptQuest:On("DoClick", function()
+                Derma_Query("Accept Mission '" .. name .. "'?", "Accept", "Yes", function()
+                    net.Start("QUEST_SYSTEM_Quest_Accept")
+                    net.WriteString(id)
+                    net.SendToServer()
+                    QUEST_SYSTEM.QuestFrame:Close()
+                end, "No", function() return end)
+            end)
+
+            Button_AcceptQuest:ClearPaint():Background(Color(29, 87, 196, 255)):Text("Accept", "QUEST_SYSTEM_ItemInfo", Color(255, 255, 255, 255)):BarHover():CircleClick():Outline(Color(255, 255, 255, 255), 1)
+        end
+        local regquesttable = {"retrieval_crystal", "train_recruit", "pilot_flying", "pilot_drop", "interrogate", "inspection_1", "guardply_isb", "guard_isb", "guard_bridge", "guard_npcc", "navy", "guard_temple", "guardply_ihc", "guard_ihc", "medic_heal", "medic_1", "medic_revive", "grapple_hit", "jetpack", "cuff_3", "shield", "place_fortification", "janitor_1", "repairship", "throw_flashbang", "throw_thermaldet", "cloakmove", "sithforce", "duel"}
+        for _, quest in SortedPairs(QUEST_SYSTEM.AvailableQuests) do
+			if quest["ID"] == "pilot_flying" and LocalPlayer():GetRegiment() == "Imperial Starfighter Corps" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "pilot_drop" and LocalPlayer():GetRegiment() == "Imperial Starfighter Corps" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "interrogate" and LocalPlayer():GetRegiment() == "Imperial Security Bureau" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "inspection_1" and LocalPlayer():GetRegiment() == "Imperial Security Bureau" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "guardply_isb" and LocalPlayer():GetRegiment() == "Death Trooper" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "guard_isb" and LocalPlayer():GetRegiment() == "Death Trooper" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "guard_bridge" and LocalPlayer():GetRegiment() == "Chimaera Squad" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+            elseif quest["ID"] == "guard_npcc" and LocalPlayer():GetRegiment() == "Chimaera Squad" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "navy" and LocalPlayer():GetRegiment() == "Imperial Navy" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "guard_temple" and LocalPlayer():GetRegiment() == "Purge Trooper" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "guard_temple" and LocalPlayer():GetRegiment() == "Imperial Guard" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "guard_temple" and LocalPlayer():GetRegiment() == "Shadow Guard" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "guard_temple" and LocalPlayer():GetRegiment() == "501st Vader's Fist" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "guardply_ihc" and LocalPlayer():GetRegiment() == "996th Imperial Guard" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "guard_ihc" and LocalPlayer():GetRegiment() == "107th Nova Company" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "medic_heal" and LocalPlayer():GetRegiment() == "439th Medical Company" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+            elseif quest["ID"] == "medic_1" and LocalPlayer():GetRegiment() == "439th Medical Company" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "medic_revive" and LocalPlayer():GetRegiment() == "439th Medical Company" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "grapple_hit" and LocalPlayer():GetRegiment() == "Range Trooper" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "grapple_hit" and LocalPlayer():GetRegiment() == "501st Storm Commandos"then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "grapple_hit" and LocalPlayer():GetJobTable().Name == "Cinder Sniper" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "grapple_hit" and (LocalPlayer():HasWeapon("realistic_hook")) then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "jetpack" and LocalPlayer():GetRegiment() == "17th Sky Divison" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "jetpack" and (LocalPlayer():HasWeapon("weapon_jetpack")) then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "cuff_3" and (LocalPlayer():HasWeapon("weapon_cuff_elastic")) then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "shield" and (LocalPlayer():HasWeapon("weapon_policeshield")) then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "place_fortification" and LocalPlayer():GetRegiment() == "Naval Engineer" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "janitor_1" and LocalPlayer():GetRegiment() == "Naval Engineer" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "repairship" and LocalPlayer():GetRegiment() == "Naval Engineer" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "throw_flashbang" and (LocalPlayer():HasWeapon("zeus_flashbang")) then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "throw_thermaldet" and (LocalPlayer():HasWeapon("zeus_thermaldet")) then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"])  
+			elseif quest["ID"] == "cloakmove" and (LocalPlayer():HasWeapon("weapon_camo")) then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "sithforce" and LocalPlayer():GetRegiment() == "Sith" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "sithforce" and LocalPlayer():GetRegiment() == "Imperial Inquisitor" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "sithforce" and LocalPlayer():GetRegiment() == "Imperial Guard" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "sithforce" and LocalPlayer():GetRegiment() == "Sith Marauder" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "duel" and LocalPlayer():GetRegiment() == "Imperial Inquisitor" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "duel" and LocalPlayer():GetRegiment() == "Imperial Guard" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "duel" and LocalPlayer():GetRegiment() == "Sith Inquisitor" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "duel" and LocalPlayer():GetRegiment() == "Shadow Guard" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif quest["ID"] == "duel" and LocalPlayer():GetRegiment() == "Sith Marauder" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"])
+            elseif quest["ID"] == "retrieval_crystal" and LocalPlayer():GetRegiment() == "Sith" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+            elseif quest["ID"] == "retrieval_crystal" and LocalPlayer():GetRegiment() == "Imperial Guard" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+            elseif quest["ID"] == "retrieval_crystal" and LocalPlayer():GetRegiment() == "Imperial Inquisitor" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+            elseif quest["ID"] == "retrieval_crystal" and LocalPlayer():GetRegiment() == "Shadow Guard" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+            elseif quest["ID"] == "retrieval_crystal" and LocalPlayer():GetRegiment() == "Sith Marauder" then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"])    
+            elseif quest["ID"] == "train_recruit" and LocalPlayer():GetRank() >= 4 then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) 
+			elseif not table.HasValue(regquesttable, quest["ID"]) then AddItem(quest["ID"], quest["Name"], quest["Instruction"], quest["Reward"], quest["Time"], quest["Amount"]) end
+        end
+    end
+
+    QUEST_SYSTEM.QuestFrame:Update()
+end

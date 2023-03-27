@@ -1,0 +1,1 @@
+player_manager.AddValidModel( "Falon Grey", "models/falon/falon.mdl" )

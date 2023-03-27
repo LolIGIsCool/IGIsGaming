@@ -1,0 +1,7 @@
+include("rebel_system/sh_init.lua")
+include("rebel_system/client/cl_player_point_tracking.lua")
+include("rebel_system/server/sv_player_functions.lua")
+include("rebel_system/client/cl_player_point_hacking.lua")
+include("rebel_system/client/cl_player_theft.lua")
+include("rebel_system/client/cl_player_receive_instructions.lua")
+include("rebel_system/client/rebel_hud.lua")

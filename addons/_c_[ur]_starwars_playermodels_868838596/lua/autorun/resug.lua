@@ -1,0 +1,1 @@
+player_manager.AddValidModel( "Arcann Rebuilt", "models/rebuilt/arcann_rebuilt.mdl" )

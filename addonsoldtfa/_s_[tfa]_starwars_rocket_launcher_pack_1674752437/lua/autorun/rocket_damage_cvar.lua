@@ -1,0 +1,1 @@
+CreateConVar("rw_sw_rocket_damage", "350", 8192, "Change the rocket damage.")

@@ -1,0 +1,17 @@
+MISSION.Name = "Sabotage 1"
+MISSION.Instructions = "Go to the eng room and hack its console" -- this is what the player will receive when they accept the mission
+MISSION.Reward = 400 -- credits the player will receive after a mission is completed
+MISSION.Penalty = 10 -- if the player fails for whatever reason, the amount of credits taken away
+MISSION.Time = 10 -- For Hacking missions, this time will be added onto the wait time for a timer, basically how much wiggleroom you want to give the player when hacking
+MISSION.WaitTime = 5 -- this is the amount of time the rebel has to be inside the point for
+MISSION.Radius = 300 -- how big is the zone the rebel has to get too
+MISSION.MainPoint = Vector() -- if there is multiple points, this is the first one they are going to get on mission accept MUST BE A VECTOR
+MISSION.Level = 1 -- when a level is completed, the next mission will be randomly selected from a level that is higher. 
+MISSION.Type = "Hack" -- used to make sure the player has stayed in the zone for the minimum amount of time
+MISSION.CurrentTarget = nil
+MISSION.Sound = "" -- the sound is the key in the table in sh_rebel.lua under lua/autorun
+MISSION.OnStart = REBEL_FUNCTIONS.HackingOnStart
+-- returns whether the mission is still in progress
+MISSION.InProgress = REBEL_FUNCTIONS.HackingInProgress
+
+MISSION.OnAbort = REBEL_FUNCTIONS.HackingAbort

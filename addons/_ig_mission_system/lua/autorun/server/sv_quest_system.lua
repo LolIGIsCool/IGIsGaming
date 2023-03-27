@@ -1,0 +1,6 @@
+include("quest_system/sv_init.lua")
+AddCSLuaFile("quest_system/cl_init.lua")
+resource.AddFile("materials/defcon/vanilla_currentobjective.png")
+resource.AddFile("materials/defcon/vanilla_currentobjective_colour.png")
+resource.AddFile("materials/defcon/vanilla_mission.png")
+resource.AddFile("materials/defcon/vanilla_regobjective.png")

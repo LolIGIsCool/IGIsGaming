@@ -1,0 +1,15 @@
+list.Set( "swbf_rebel_soldiersnow_linnea", "models/player/hydro/linnea/swbf_rebel_soldiersnow_linnea/swbf_rebel_soldiersnow_linnea.mdl" )   // "models/player/hydro/linnea/swbf_rebel_soldiersnow_linnea/swbf_rebel_soldiersnow_linnea.mdl" )
+player_manager.AddValidModel( "swbf_rebel_soldiersnow_linnea", "models/player/hydro/linnea/swbf_rebel_soldiersnow_linnea/swbf_rebel_soldiersnow_linnea.mdl" )   // "models/player/hydro/linnea/swbf_rebel_soldiersnow_linnea/swbf_rebel_soldiersnow_linnea.mdl" )
+player_manager.AddValidHands( "swbf_rebel_soldiersnow_linnea", "models/player/hydro/roger/swbf_rebel_soldiersnow_roger/swbf_rebel_soldiersnow_hands.mdl", 0, "00000000" ) // "models/player/hydro/roger/swbf_rebel_soldiersnow_roger/swbf_rebel_soldiersnow_hands.mdl", 0, "00000000"
+
+list.Set( "swbf_rebel_soldiermagma_linnea", "models/player/hydro/linnea/swbf_rebel_soldiermagma_linnea/swbf_rebel_soldiermagma_linnea.mdl" )   // "models/player/hydro/linnea/swbf_rebel_soldiermagma_linnea/swbf_rebel_soldiermagma_linnea.mdl" )
+player_manager.AddValidModel( "swbf_rebel_soldiermagma_linnea", "models/player/hydro/linnea/swbf_rebel_soldiermagma_linnea/swbf_rebel_soldiermagma_linnea.mdl" )   // "models/player/hydro/linnea/swbf_rebel_soldiermagma_linnea/swbf_rebel_soldiermagma_linnea.mdl" )
+player_manager.AddValidHands( "swbf_rebel_soldiermagma_linnea", "models/player/hydro/roger/swbf_rebel_soldiermagma_roger/swbf_rebel_soldiermagma_hands.mdl", 0, "00000000" ) // "models/player/hydro/roger/swbf_rebel_soldiermagma_roger/swbf_rebel_soldiermagma_hands.mdl", 0, "00000000"
+
+list.Set( "swbf_rebel_soldiersand_linnea", "models/player/hydro/linnea/swbf_rebel_soldiersand_linnea/swbf_rebel_soldiersand_linnea.mdl" )   // "models/player/hydro/linnea/swbf_rebel_soldiersand_linnea/swbf_rebel_soldiersand_linnea.mdl" )
+player_manager.AddValidModel( "swbf_rebel_soldiersand_linnea", "models/player/hydro/linnea/swbf_rebel_soldiersand_linnea/swbf_rebel_soldiersand_linnea.mdl" )   // "models/player/hydro/linnea/swbf_rebel_soldiersand_linnea/swbf_rebel_soldiersand_linnea.mdl" )
+player_manager.AddValidHands( "swbf_rebel_soldiersand_linnea", "models/player/hydro/roger/swbf_rebel_soldiersand_roger/swbf_rebel_soldiersand_hands.mdl", 0, "00000000" ) // "models/player/hydro/roger/swbf_rebel_soldiersand_roger/swbf_rebel_soldiersand_hands.mdl", 0, "00000000"
+
+list.Set( "swbf_rebel_soldierforest_linnea", "models/player/hydro/linnea/swbf_rebel_soldierforest_linnea/swbf_rebel_soldierforest_linnea.mdl" )   // "models/player/hydro/linnea/swbf_rebel_soldierforest_linnea/swbf_rebel_soldierforest_linnea.mdl" )
+player_manager.AddValidModel( "swbf_rebel_soldierforest_linnea", "models/player/hydro/linnea/swbf_rebel_soldierforest_linnea/swbf_rebel_soldierforest_linnea.mdl" )   // "models/player/hydro/linnea/swbf_rebel_soldierforest_linnea/swbf_rebel_soldierforest_linnea.mdl" )
+player_manager.AddValidHands( "swbf_rebel_soldierforest_linnea", "models/player/hydro/roger/swbf_rebel_soldierforest_roger/swbf_rebel_soldierforest_hands.mdl", 0, "00000000" ) // "models/player/hydro/roger/swbf_rebel_soldierforest_roger/swbf_rebel_soldierforest_hands.mdl", 0, "00000000"

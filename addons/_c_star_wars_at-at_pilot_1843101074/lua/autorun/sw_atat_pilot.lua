@@ -1,0 +1,3 @@
+list.Set( "ATAT Pilot", "Models/Player/Markus/StarWars/Custom/Characters/Imperial/ATAT_Pilot/ATAT_Pilot_01/ATAT_Pilot_01_Mesh.mdl" ) // "Models/Player/Markus/StarWars/Custom/Characters/Imperial/ATAT_Pilot/ATAT_Pilot_01/ATAT_Pilot_01_Mesh.mdl" )
+player_manager.AddValidModel( "ATAT Pilot", "Models/Player/Markus/StarWars/Custom/Characters/Imperial/ATAT_Pilot/ATAT_Pilot_01/ATAT_Pilot_01_Mesh.mdl" ) // "Models/Player/Markus/StarWars/Custom/Characters/Imperial/ATAT_Pilot/ATAT_Pilot_01/ATAT_Pilot_01_Mesh.mdl" )
+player_manager.AddValidHands( "ATAT Pilot", "Models/Hands/Markus/StarWars/Custom/Characters/Imperial/ATAT_Pilot/ATAT_Pilot_01/ATAT_Pilot_01_Mesh.mdl", 0, "00000000" ) 

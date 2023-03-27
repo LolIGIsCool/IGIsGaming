@@ -1,0 +1,66 @@
+include("shared.lua")
+
+function ENT:Draw()
+    self:DrawModel()
+
+    if (LocalPlayer():GetPos():Distance(self:GetPos()) < 500) then
+		local vecPos = self:GetPos()
+		local vecAng = self:GetAngles()
+		vecAng:RotateAroundAxis(vecAng:Up(), 90)
+		vecAng:RotateAroundAxis(vecAng:Forward(), 90)
+        local strTitle = "Mission Vendor"
+        surface.SetFont("QUEST_SYSTEM_ItemTitle")
+        cam.Start3D2D(vecPos + Vector(0, 0, 81), vecAng, .25)
+        draw.WordBox(0, -surface.GetTextSize(strTitle) / 2, -3, strTitle, "QUEST_SYSTEM_ItemTitle", Color(0, 0, 0, 200), color_white)
+        cam.End3D2D()
+    end
+end
+
+net.Receive("QUEST_SYSTEM_OpenDialogue", function(len, ply)
+    local QUEST_SYSTEM_MainFrame = TDLib("DFrame")
+    QUEST_SYSTEM_MainFrame:SetSize(400, 150)
+    QUEST_SYSTEM_MainFrame:Center()
+    QUEST_SYSTEM_MainFrame:MakePopup()
+    QUEST_SYSTEM_MainFrame:SetTitle("")
+    QUEST_SYSTEM_MainFrame:SetDraggable(false)
+    QUEST_SYSTEM_MainFrame.btnMaxim:Hide()
+    QUEST_SYSTEM_MainFrame.btnMinim:Hide()
+    QUEST_SYSTEM_MainFrame:ClearPaint():Blur():Background(Color(0, 0, 0, 200)):Outline(Color(255, 255, 255, 255), 2)
+    local QUEST_SYSTEM_Icon = TDLib("SpawnIcon", QUEST_SYSTEM_MainFrame)
+    QUEST_SYSTEM_Icon:Stick(LEFT, 5)
+    QUEST_SYSTEM_Icon:SetWide(100)
+    QUEST_SYSTEM_Icon:SetModel("models/imperial_officer/npc_officer.mdl")
+    QUEST_SYSTEM_Icon:SetMouseInputEnabled(false)
+    local QUEST_SYSTEM_Panel = TDLib("DPanel", QUEST_SYSTEM_MainFrame)
+    QUEST_SYSTEM_Panel:Stick(CENTER, 5)
+    QUEST_SYSTEM_Panel:SetWide(200)
+    QUEST_SYSTEM_Panel:ClearPaint()
+    local QUEST_SYSTEM_Greeting = TDLib("DLabel", QUEST_SYSTEM_Panel)
+    QUEST_SYSTEM_Greeting:Stick(TOP, 5)
+    QUEST_SYSTEM_Greeting:SetTall(60)
+    QUEST_SYSTEM_Greeting:SetText("Mission Vendor says: \nHello trooper, how may I help you?")
+    QUEST_SYSTEM_Greeting:SetTextColor(Color(255, 255, 255, 255))
+    QUEST_SYSTEM_Greeting:SetWrap(true)
+    local Button_Quest = TDLib("DButton", QUEST_SYSTEM_Panel)
+    Button_Quest:SetPos(10, QUEST_SYSTEM_Panel:GetTall() - 35)
+    Button_Quest:SetSize(145, 25)
+
+    Button_Quest:On("DoClick", function(self)
+        QUEST_SYSTEM.OpenMenu_Quests()
+        QUEST_SYSTEM_MainFrame:Close()
+    end)
+
+    Button_Quest:ClearPaint():Background(Color(29, 87, 196)):Text("I want a Mission!", "QUEST_SYSTEM_ItemInfo", Color(255, 255, 255, 255)):BarHover():CircleClick():Outline(Color(255, 255, 255, 255), 1)
+
+    --local Button_Prestige = TDLib("DButton", QUEST_SYSTEM_Panel)
+    --Button_Prestige:SetPos(115, QUEST_SYSTEM_Panel:GetTall() - 35)
+    --Button_Prestige:SetSize(120, 25)
+
+    --Button_Prestige:On("DoClick", function(self)
+    --    net.Start("RequestPrestiging")
+    --    net.SendToServer()
+    --    QUEST_SYSTEM_MainFrame:Close()
+    --end)
+
+    --Button_Prestige:ClearPaint():Background(Color(29, 87, 196)):Text("Prestige Questline", "QUEST_SYSTEM_ItemInfo", Color(255, 255, 255, 255)):BarHover():CircleClick():Outline(Color(255, 255, 255, 255), 1)
+end)
